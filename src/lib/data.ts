@@ -22,3 +22,8 @@ export function loadOffice() {
   const file = path.join(dataDir, "office.json");
   return JSON.parse(fs.readFileSync(file, "utf8"));
 }
+
+export function loadStatus() {
+  const file = path.join(dataDir, "status.json");
+  return JSON.parse(fs.readFileSync(file, "utf8"));
+}

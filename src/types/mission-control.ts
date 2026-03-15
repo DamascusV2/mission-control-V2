@@ -55,3 +55,28 @@ export type TaskBoardData = {
   }[];
   columns: TaskColumn[];
 };
+
+export type ModuleState = "Not Started" | "In Progress" | "Live" | "Blocked";
+
+export type ModuleStatus = {
+  id: string;
+  name: string;
+  owner: string;
+  state: ModuleState;
+  updated: string;
+  notes: string;
+  blocker?: string | null;
+};
+
+export type ActivityEntry = {
+  id: string;
+  timestamp: string;
+  summary: string;
+  owner: string;
+};
+
+export type StatusPayload = {
+  build: ModuleStatus[];
+  runtime: ModuleStatus[];
+  activity: ActivityEntry[];
+};
