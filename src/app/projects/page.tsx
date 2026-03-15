@@ -1,7 +1,8 @@
 import { loadProjects } from "../../lib/data";
+import type { Project, ProjectLink } from "../../types/mission-control";
 
 export default function ProjectsPage() {
-  const projects = loadProjects();
+  const projects = loadProjects() as Project[];
   return (
     <div className="space-y-6">
       <div>
@@ -9,7 +10,7 @@ export default function ProjectsPage() {
         <h2 className="text-2xl font-semibold">Projects</h2>
       </div>
       <div className="grid gap-4 md:grid-cols-3">
-        {projects.map((project: any) => (
+        {projects.map((project: Project) => (
           <div key={project.id} className="bg-panel rounded-2xl border border-white/5 shadow-panel p-5 space-y-3">
             <div className="flex items-center justify-between">
               <p className="text-sm font-semibold">{project.name}</p>
@@ -19,7 +20,7 @@ export default function ProjectsPage() {
             <p className="text-xs text-white/40">Owner: {project.owner}</p>
             <p className="text-xs text-white/40">Updated: {new Date(project.lastUpdated).toLocaleString()}</p>
             <div className="text-xs text-white/50 space-y-1">
-              {project.links?.map((link: any) => (
+              {project.links?.map((link: ProjectLink) => (
                 <div key={link.href}>• {link.label}</div>
               ))}
             </div>

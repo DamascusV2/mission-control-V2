@@ -1,7 +1,8 @@
 import { loadTasks } from "../../lib/data";
+import type { Task, TaskBoardData, TaskColumn } from "../../types/mission-control";
 
 export default function TaskBoardPage() {
-  const data = loadTasks();
+  const data = loadTasks() as TaskBoardData;
   return (
     <div className="space-y-6">
       <div>
@@ -9,14 +10,14 @@ export default function TaskBoardPage() {
         <h2 className="text-2xl font-semibold">Mission Task Board</h2>
       </div>
       <div className="grid gap-4 md:grid-cols-4">
-        {data.columns.map((column: any) => (
+        {data.columns.map((column: TaskColumn) => (
           <div key={column.id} className="bg-panel rounded-2xl border border-white/5 shadow-panel flex flex-col max-h-[70vh]">
             <div className="px-4 py-3 border-b border-white/5">
               <p className="text-sm font-semibold">{column.title}</p>
               <p className="text-xs text-white/40">{column.tasks.length} tasks</p>
             </div>
             <div className="flex-1 overflow-y-auto p-3 space-y-3">
-              {column.tasks.map((task: any) => (
+              {column.tasks.map((task: Task) => (
                 <div key={task.id} className="bg-white/5 rounded-xl p-3 text-sm space-y-2">
                   <div className="flex justify-between text-xs text-white/50">
                     <span>{task.owner}</span>

@@ -1,4 +1,5 @@
 import { loadTeam } from "../../lib/data";
+import type { Agent, TeamData } from "../../types/mission-control";
 
 const workloadMap: Record<string, string> = {
   damascus: "Heavy",
@@ -15,7 +16,7 @@ const currentTasks: Record<string, string> = {
 };
 
 export default function AgentStatusPage() {
-  const team = loadTeam();
+  const team = loadTeam() as TeamData;
   return (
     <div className="space-y-6">
       <div>
@@ -23,7 +24,7 @@ export default function AgentStatusPage() {
         <h2 className="text-2xl font-semibold">Status Board</h2>
       </div>
       <div className="grid gap-4 md:grid-cols-2">
-        {team.agents.map((agent: any) => (
+        {team.agents.map((agent: Agent) => (
           <div key={agent.id} className="bg-panel rounded-2xl border border-white/5 shadow-panel p-4 space-y-2">
             <div className="flex items-center justify-between">
               <div>
