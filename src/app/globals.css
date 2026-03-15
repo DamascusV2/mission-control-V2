@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply min-h-screen text-white;
+  background: radial-gradient(circle at top, rgba(31,64,55,0.5), transparent 60%),
+              radial-gradient(circle at 20% 20%, rgba(86,131,122,0.4), transparent 45%),
+              #040809;
+}
+
+.glass-card {
+  background: rgba(6, 12, 14, 0.7);
+  border: 1px solid rgba(147, 197, 114, 0.15);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(18px);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f2937;
+  border-radius: 999px;
+}
+
+@layer utilities {
+  .text-white\/80 { color: rgba(255, 255, 255, 0.8); }
+  .text-white\/70 { color: rgba(255, 255, 255, 0.7); }
+  .text-white\/60 { color: rgba(255, 255, 255, 0.6); }
+  .text-white\/50 { color: rgba(255, 255, 255, 0.5); }
+  .text-white\/40 { color: rgba(255, 255, 255, 0.4); }
+  .text-white\/30 { color: rgba(255, 255, 255, 0.3); }
+  .bg-white\/5 { background-color: rgba(255, 255, 255, 0.05); }
+  .bg-white\/10 { background-color: rgba(255, 255, 255, 0.1); }
+  .bg-panel\/80 { background-color: rgba(16, 19, 32, 0.8); }
+  .bg-emerald-500\/10 { background-color: rgba(16, 185, 129, 0.1); }
+  .bg-green-400\/20 { background-color: rgba(74, 222, 128, 0.2); }
+  .bg-amber-400\/20 { background-color: rgba(251, 191, 36, 0.2); }
+  .border-white\/5 { border-color: rgba(255, 255, 255, 0.05); }
+  .border-white\/10 { border-color: rgba(255, 255, 255, 0.1); }
+  .border-emerald-300\/40 { border-color: rgba(110, 231, 183, 0.4); }
+  .hover\:bg-white\/5:hover { background-color: rgba(255, 255, 255, 0.05); }
+}

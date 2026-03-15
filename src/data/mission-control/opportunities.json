@@ -1,0 +1,20 @@
+[
+  {
+    "id": "opp-001",
+    "category": "Property Data",
+    "signal": "36 homes in 33647 with 2012 roofs, insurance renewals Q2",
+    "status": "investigating"
+  },
+  {
+    "id": "opp-002",
+    "category": "Contractor Demand",
+    "signal": "Pinellas contractors advertising for sub crews (labor shortage)",
+    "status": "ready"
+  },
+  {
+    "id": "opp-003",
+    "category": "Automation",
+    "signal": "Local HVAC firms asking for AI scheduling assistants on Reddit",
+    "status": "research"
+  }
+]
