@@ -1,5 +1,5 @@
-import { loadStatus } from "../lib/data";
-import type { ModuleState, ModuleStatus, StatusPayload } from "../types/mission-control";
+import { loadStatus, loadVector } from "../lib/data";
+import type { ModuleMapEntry, ModuleState, ModuleStatus, QueueItem, StatusPayload, VectorPayload } from "../types/mission-control";
 
 const highlights = [
   { label: "Operational Tempo", value: "Green", detail: "6 active tracks" },
@@ -55,8 +55,71 @@ function StatusPanel({ title, items }: { title: string; items: ModuleStatus[] })
   );
 }
 
+function ModuleMapPanel({ entries }: { entries: ModuleMapEntry[] }) {
+  return (
+    <div className="glass-card rounded-3xl border border-white/10 p-6 space-y-4">
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-xs uppercase tracking-[0.4em] text-white/50">Module Map</p>
+          <h3 className="text-2xl font-semibold">System Modules</h3>
+        </div>
+        <span className="text-xs text-white/40">Phase + dependencies</span>
+      </div>
+      <div className="space-y-3">
+        {entries.map((entry) => (
+          <div key={entry.id} className="rounded-2xl border border-white/10 bg-white/5 p-4 space-y-2">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-semibold">{entry.module}</p>
+                <p className="text-xs text-white/50">{entry.phase} • Owner: {entry.owner}</p>
+              </div>
+              <span className={`text-xs px-3 py-1 rounded-full border ${stateStyles[entry.state]}`}>{entry.state}</span>
+            </div>
+            <p className="text-sm text-white/70">{entry.notes}</p>
+            {entry.dependencies?.length ? (
+              <p className="text-xs text-white/40">Dependencies: {entry.dependencies.join(", ")}</p>
+            ) : null}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function QueuePanel({ items }: { items: QueueItem[] }) {
+  return (
+    <div className="glass-card rounded-3xl border border-white/10 p-6 space-y-4">
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-xs uppercase tracking-[0.4em] text-white/50">Roadmap</p>
+          <h3 className="text-2xl font-semibold">Queue</h3>
+        </div>
+        <span className="text-xs text-white/40">Next slices</span>
+      </div>
+      <div className="space-y-3">
+        {items.map((item) => (
+          <div key={item.id} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-semibold">{item.title}</p>
+                <p className="text-xs text-white/50">Owner: {item.owner}</p>
+              </div>
+              <span className={`text-xs px-3 py-1 rounded-full border ${stateStyles[item.state]}`}>{item.state}</span>
+            </div>
+            <div className="flex items-center justify-between text-xs text-white/40 mt-1">
+              <span>ETA: {item.eta}</span>
+            </div>
+            {item.notes && <p className="text-sm text-white/70 mt-2">{item.notes}</p>}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function Page() {
   const status = loadStatus() as StatusPayload;
+  const vector = loadVector() as VectorPayload;
   const activity = status.activity;
 
   return (
@@ -130,6 +193,11 @@ export default function Page() {
       <div className="grid gap-6 lg:grid-cols-2">
         <StatusPanel title="Build Status" items={status.build} />
         <StatusPanel title="Runtime Status" items={status.runtime} />
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        <ModuleMapPanel entries={vector.map} />
+        <QueuePanel items={vector.queue} />
       </div>
     </div>
   );

@@ -27,3 +27,8 @@ export function loadStatus() {
   const file = path.join(dataDir, "status.json");
   return JSON.parse(fs.readFileSync(file, "utf8"));
 }
+
+export function loadVector() {
+  const file = path.join(dataDir, "vector.json");
+  return JSON.parse(fs.readFileSync(file, "utf8"));
+}

@@ -1,0 +1,86 @@
+{
+  "map": [
+    {
+      "id": "command-overview",
+      "module": "Command Overview",
+      "phase": "Core Bundle",
+      "owner": "Damascus",
+      "state": "Live",
+      "notes": "War Room, Agent Status, and Intel Feed online.",
+      "links": ["/"],
+      "dependencies": []
+    },
+    {
+      "id": "vector-build-status",
+      "module": "Vector Build Status",
+      "phase": "Phase 1",
+      "owner": "Vector",
+      "state": "In Progress",
+      "notes": "API + UI wired; module map + queue shipping now.",
+      "links": ["/api/status"],
+      "dependencies": ["status-api"]
+    },
+    {
+      "id": "runtime-health",
+      "module": "Runtime Health",
+      "phase": "Phase 1",
+      "owner": "Sentinel",
+      "state": "Not Started",
+      "notes": "Needs Sentinel heartbeat + cron telemetry endpoints.",
+      "links": ["/system-health"],
+      "dependencies": ["sentinel-heartbeat"]
+    },
+    {
+      "id": "command-console",
+      "module": "Command Console v1",
+      "phase": "Phase 2",
+      "owner": "Forge",
+      "state": "Blocked",
+      "notes": "Waiting on Phase 1 visibility baseline.",
+      "links": ["/console"],
+      "dependencies": ["vector-observability"]
+    }
+  ],
+  "queue": [
+    {
+      "id": "status-api",
+      "title": "Status schema + API",
+      "owner": "Damascus",
+      "state": "Live",
+      "eta": "Shipped",
+      "notes": "Drives Build/Runtime boards." 
+    },
+    {
+      "id": "module-map",
+      "title": "Module Map cards",
+      "owner": "Vector",
+      "state": "In Progress",
+      "eta": "Tonight",
+      "notes": "Show each module, owner, dependencies." 
+    },
+    {
+      "id": "roadmap-queue",
+      "title": "Queue / Roadmap view",
+      "owner": "Vector",
+      "state": "In Progress",
+      "eta": "Tonight",
+      "notes": "Expose next three slices + blockers." 
+    },
+    {
+      "id": "sentinel-heartbeat",
+      "title": "Sentinel heartbeat feed",
+      "owner": "Sentinel",
+      "state": "Blocked",
+      "eta": "Needs hardware",
+      "notes": "Awaiting Mac mini sensor wiring." 
+    },
+    {
+      "id": "vector-observability",
+      "title": "Observability baseline complete",
+      "owner": "Vector",
+      "state": "Not Started",
+      "eta": "Tomorrow",
+      "notes": "Unlocks Command Console + Opportunity Scanner." 
+    }
+  ]
+}

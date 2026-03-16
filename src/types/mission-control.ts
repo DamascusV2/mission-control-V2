@@ -80,3 +80,28 @@ export type StatusPayload = {
   runtime: ModuleStatus[];
   activity: ActivityEntry[];
 };
+
+export type ModuleMapEntry = {
+  id: string;
+  module: string;
+  phase: string;
+  owner: string;
+  state: ModuleState;
+  notes: string;
+  links?: string[];
+  dependencies?: string[];
+};
+
+export type QueueItem = {
+  id: string;
+  title: string;
+  owner: string;
+  state: ModuleState;
+  eta: string;
+  notes?: string;
+};
+
+export type VectorPayload = {
+  map: ModuleMapEntry[];
+  queue: QueueItem[];
+};
