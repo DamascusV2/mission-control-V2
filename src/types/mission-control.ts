@@ -105,3 +105,25 @@ export type VectorPayload = {
   map: ModuleMapEntry[];
   queue: QueueItem[];
 };
+
+export type DeploymentEntry = {
+  id: string;
+  timestamp: string;
+  summary: string;
+  owner: string;
+  artifact?: string;
+  notes?: string;
+};
+
+export type AutomationEvent = {
+  id: string;
+  timestamp: string;
+  summary: string;
+  channel: string;
+  status: string;
+};
+
+export type DeployPayload = {
+  releases: DeploymentEntry[];
+  automation: AutomationEvent[];
+};

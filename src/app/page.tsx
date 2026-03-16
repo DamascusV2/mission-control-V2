@@ -1,5 +1,5 @@
-import { loadStatus, loadVector } from "../lib/data";
-import type { ModuleMapEntry, ModuleState, ModuleStatus, QueueItem, StatusPayload, VectorPayload } from "../types/mission-control";
+import { loadDeployments, loadStatus, loadVector } from "../lib/data";
+import type { AutomationEvent, DeployPayload, DeploymentEntry, ModuleMapEntry, ModuleState, ModuleStatus, QueueItem, StatusPayload, VectorPayload } from "../types/mission-control";
 
 const highlights = [
   { label: "Operational Tempo", value: "Green", detail: "6 active tracks" },
@@ -86,6 +86,7 @@ function ModuleMapPanel({ entries }: { entries: ModuleMapEntry[] }) {
   );
 }
 
+
 function QueuePanel({ items }: { items: QueueItem[] }) {
   return (
     <div className="glass-card rounded-3xl border border-white/10 p-6 space-y-4">
@@ -117,9 +118,66 @@ function QueuePanel({ items }: { items: QueueItem[] }) {
   );
 }
 
+function DeploymentPanel({ releases }: { releases: DeploymentEntry[] }) {
+  return (
+    <div className="glass-card rounded-3xl border border-white/10 p-6 space-y-4">
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-xs uppercase tracking-[0.4em] text-white/50">Deployments</p>
+          <h3 className="text-2xl font-semibold">Release Log</h3>
+        </div>
+        <span className="text-xs text-white/40">Artifacts + owners</span>
+      </div>
+      <div className="space-y-3">
+        {releases.map((release) => (
+          <div key={release.id} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <div className="flex items-center justify-between text-xs text-white/50">
+              <span>{formatTime(release.timestamp)}</span>
+              <span>{release.owner}</span>
+            </div>
+            <p className="text-sm font-semibold text-white">{release.summary}</p>
+            {release.artifact && <p className="text-xs text-white/40">Artifact: {release.artifact}</p>}
+            {release.notes && <p className="text-xs text-white/50">{release.notes}</p>}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function AutomationPanel({ events }: { events: AutomationEvent[] }) {
+  return (
+    <div className="glass-card rounded-3xl border border-white/10 p-6 space-y-4">
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-xs uppercase tracking-[0.4em] text-white/50">Automation</p>
+          <h3 className="text-2xl font-semibold">Activity Log</h3>
+        </div>
+        <span className="text-xs text-white/40">Channel + status</span>
+      </div>
+      <div className="space-y-3">
+        {events.map((event) => (
+          <div key={event.id} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <div className="flex items-center justify-between text-xs text-white/50">
+              <span>{formatTime(event.timestamp)}</span>
+              <span>{event.channel}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <p className="text-sm font-semibold text-white">{event.summary}</p>
+              <span className="text-xs px-3 py-1 rounded-full border border-white/10 text-white/70">{event.status}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+
 export default function Page() {
   const status = loadStatus() as StatusPayload;
   const vector = loadVector() as VectorPayload;
+  const deployments = loadDeployments() as DeployPayload;
   const activity = status.activity;
 
   return (
@@ -198,6 +256,11 @@ export default function Page() {
       <div className="grid gap-6 lg:grid-cols-2">
         <ModuleMapPanel entries={vector.map} />
         <QueuePanel items={vector.queue} />
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        <DeploymentPanel releases={deployments.releases} />
+        <AutomationPanel events={deployments.automation} />
       </div>
     </div>
   );

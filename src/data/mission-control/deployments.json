@@ -1,0 +1,43 @@
+{
+  "releases": [
+    {
+      "id": "rel-20260315-01",
+      "timestamp": "2026-03-15T19:35:00-04:00",
+      "summary": "Vector Build/Runtime status boards",
+      "owner": "Damascus",
+      "artifact": "mission-control-redeploy-20260315.zip",
+      "notes": "Pushed commit c4bec25 to wheat"
+    },
+    {
+      "id": "rel-20260315-02",
+      "timestamp": "2026-03-15T21:45:00-04:00",
+      "summary": "Module Map + Queue + vector API",
+      "owner": "Damascus",
+      "artifact": "mission-control-redeploy-20260315.zip",
+      "notes": "Commit 65cff5c"
+    }
+  ],
+  "automation": [
+    {
+      "id": "auto-001",
+      "timestamp": "2026-03-15T20:00:00-04:00",
+      "summary": "Hourly digest batching check",
+      "channel": "Cron",
+      "status": "OK"
+    },
+    {
+      "id": "auto-002",
+      "timestamp": "2026-03-15T18:30:00-04:00",
+      "summary": "Discord system-health preview",
+      "channel": "Relay",
+      "status": "Queued"
+    },
+    {
+      "id": "auto-003",
+      "timestamp": "2026-03-15T17:15:00-04:00",
+      "summary": "Camera stack snapshot",
+      "channel": "Sentinel",
+      "status": "OK"
+    }
+  ]
+}
