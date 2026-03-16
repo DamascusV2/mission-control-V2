@@ -141,6 +141,7 @@ function DeploymentPanel({ releases }: { releases: DeploymentEntry[] }) {
           </div>
         ))}
       </div>
+      <p className="text-[11px] text-white/40">Discord payload: /api/alerts → release</p>
     </div>
   );
 }
@@ -169,6 +170,7 @@ function AutomationPanel({ events }: { events: AutomationEvent[] }) {
           </div>
         ))}
       </div>
+      <p className="text-[11px] text-white/40">Discord payload: /api/alerts → automation</p>
     </div>
   );
 }
